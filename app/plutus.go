@@ -5,6 +5,8 @@ import (
 	"godatayes"
 	"io/ioutil"
 	"os"
+	"strings"
+	"time"
 
 	"github.com/codegangsta/cli"
 )
@@ -27,16 +29,19 @@ func main() {
 		{
 			Name:        "pull",
 			Usage:       "pull <ticker> <start date> <end date> <options>",
-			Description: "Pull the stock data of specific number and save them into a specific file",
+			Description: "Pull the stock data of specific number and save them into a specific file. ticker and start date are required.",
 			Flags:       commonFlag,
 			Action: func(c *cli.Context) {
-				if len(c.Args()) >= 3 {
+				if len(c.Args()) >= 2 {
 					ticker := c.Args().First()
 					start := c.Args().Get(1)
 					end := c.Args().Get(2)
 					fileName := c.String("output")
+					if end == "" {
+						end = time.Now().Format("20060102")
+					}
 					if fileName == "" {
-						fileName = ticker + ".txt"
+						fileName = strings.Join([]string{ticker, "_", start, "_", end, ".txt"}, "")
 					}
 					data, err := godatayes.GetMktEqudByTicker(ticker, start, end)
 					if err != nil {
