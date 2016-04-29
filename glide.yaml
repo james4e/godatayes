@@ -1,0 +1,5 @@
+package: godatayes
+import:
+- package: github.com/codegangsta/cli
+- package: golang.org/x/text/encoding/simplifiedchinese
+- package: golang.org/x/text/transform

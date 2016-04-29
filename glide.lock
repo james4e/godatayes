@@ -1,0 +1,14 @@
+hash: 6b8707746178c28a1b4d5291cf57bdefb293f954ded34f429268eb8239e20537
+updated: 2016-04-29T15:16:00.725850086+08:00
+imports:
+- name: github.com/codegangsta/cli
+  version: 222ec6fb7eb8a3da24cfa4017694ba45e3f1f516
+- name: golang.org/x/text
+  version: 3100578f0f8093e37883ba48c9187fe51367ad05
+  subpackages:
+  - encoding/simplifiedchinese
+  - transform
+  - encoding
+  - encoding/internal
+  - encoding/internal/identifier
+devImports: []

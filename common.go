@@ -6,8 +6,6 @@ import (
 	"net/http"
 
 	"strings"
-
-	iconv "github.com/djimenez/iconv-go"
 )
 
 var (
@@ -40,12 +38,15 @@ func getData(path string) (string, error) {
 		fmt.Println(err)
 		return "", err
 	}
-	out := make([]byte, len(body))
+
 	if strings.Contains(path, ".csv?") {
-		iconv.Convert(body, out, "gb2312", "utf-8")
-		return string(out), nil
-	} else {
-		return string(body), nil
+		out, err := GBKToUTF8(body)
+		if err == nil {
+			return string(out), nil
+		}
+		return "", err
 	}
+
+	return string(body), nil
 
 }
